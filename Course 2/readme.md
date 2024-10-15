@@ -12,7 +12,7 @@ To install and deploy the contract, follow these steps:
 ### Executing the Program
 After deploying the contract, you can use the following functions to manage tokens:
 
-## Mint Tokens
+### Mint Tokens
 Adds tokens to a specific address and increases the total supply.
 
 ```
