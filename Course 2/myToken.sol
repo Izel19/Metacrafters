@@ -25,16 +25,16 @@ contract tokenDeFIA {
     // mapping variable here
     mapping(address => uint) public balances;
 
-    // mint function
+     // mint function
     function mint(address _address, uint _company) public{
-      totalSupply += _company;
+      overallSupply += _company;
       balances[_address] += _company;  
     }
 
     // burn function
     function burn(address _address, uint _company) public{
       if (balances[_address] >= _company){
-        totalSupply -= _company;
+        overallSupply -= _company;
         balances[_address] -= _company;
       }
         
