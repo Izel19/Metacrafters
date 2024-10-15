@@ -18,9 +18,9 @@ pragma solidity 0.8.18;
 contract tokenDeFIA {
 
     // public variables here
-    string public tokenName = "Formula1";
-    string public tokenAbbrv = "F1";
-    uint public totalSupply = 0;
+    string public companyName = "Formula1";
+    string public companyAbbrv = "F1";
+    uint public overallSupply = 0;
 
     // mapping variable here
     mapping(address => uint) public balances;
