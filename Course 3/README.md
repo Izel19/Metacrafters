@@ -1,55 +1,54 @@
-# F1FINANCE
+# TokenDeFIA
 
-F1FINANCE is a smart solidty contract that employs the assert, revert, and require statements. it lets user add and deduct ETH in an account. 
+TokenDeFIA is a Solidity smart contract that facilitates the minting and burning of tokens representing Formula 1 (F1). This contract tracks token balances for different addresses and allows for the creation and destruction of tokens while ensuring proper validations.
+
 ## Description
 
-F1FINANCE manages ETH Tokens related to Formula 1, abbreviated as "F1." The contract enables the user to add, remove, check balance, and withdraw all from an account. The contract implements assert to let the owner perform specific tasks that is available to them only. Require enables to let the action done by user be accomplished with a specific condition. Lastly, the revert returns the balance to its original state if a condition is not met.
+TokenDeFIA manages tokens related to Formula 1, abbreviated as "F1." It allows authorized users to:
+
+  -Mint new tokens for a specific address.
+  -Burn tokens from a specific address.
+  -Track the overall token supply and the balance of each address.
+The contract ensures the integrity of operations, such as validating sufficient balances before burning tokens, and includes events for monitoring token activity.
 
 ## Getting Started
 
 ### Installing
 
-To install and deploy the contract, follow these steps: 1. Set up a Solidity development environment such as Remix or Hardhat. 2. Clone or copy the contract code into your development environment.
+To install and deploy the contract, follow these steps:
 
-### Executing program
+1. Set up your environment: Use a Solidity development tool such as Remix or Hardhat
+2. Copy the code: Clone or copy the contract code into your development environment.
+3. Prepare your compiler: Ensure the Solidity compiler is set to version ^0.8.0 or compatible.
 
-After deploying the contract, you can use the following functions to manage tokens:
+## Features
 
-###Add Savings
-Allows users to deposit Ether into their account within the contract.
+
+### Mint Tokens
+Adds tokens to a specific address and increases the overall token supply.
 ```
-AddSavings() external payable
-```
-
-###Produce Upgrades
-Withdraws a specified amount of Ether if sufficient balance is available.
-```
-produceUpgrades(uint256 _amount) external
+mint(address _address, uint _amount)
 ```
 
-###Check Balance
-Returns the caller's balance.
+### Burn Tokens
+Removes tokens from a specific address and decreases the overall token supply.
 ```
-balanceChecker() external view returns (uint256)
-```
-
-###Cash Out
-Transfers the entire contract balance to the owner (only callable by the owner).
-```
-balanceChecker() external view returns (uint256)
+burn(address _address, uint _amount)
 ```
 ### Steps in Remix:
-  1. Copy the code to a file (e.g., F1Finance.sol).
-  2. Set compiler version to 0.8.13 and compile.
-  3. Deploy to a test network (e.g., JavaScript VM).
-  4. Interact with the contract:
-          -AddSavings: Deposit Ether.
-          -produceUpgrades: Withdraw Ether.
-          -balanceChecker: Check balances.
+  1. Open Remix and create a new Solidity file (e.g., TokenDeFIA.sol).
+  2. Paste the contract code into the file.
+  3. Set the compiler version to ^0.8.0 and compile the contract.
+  4. Deploy the contract to a test network (e.g., JavaScript VM or a testnet).
+Interacting with the Contract:
+          -Use the mint function to add tokens to an address. Example: mint(0xAbc123..., 100);
+          -Use the burn function to remove tokens from an address. Example: burn(0xAbc123..., 50);
 
 ### Help
- -Ensure sufficient balance before withdrawal.
- -Use Solidity version 0.8.13 to avoid errors.
+ -If the mint or burn operations fail:
+     -Verify the address's balance before burning tokens.
+     -Ensure the _amount provided to the mint function is greater than 0.
+ -Ensure compatibility by using Solidity version ^0.8.0.
 
 ### Authors
 Gregorio B. Lantajo Jr.
