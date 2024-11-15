@@ -5,7 +5,6 @@ TokenDeFIA is a Solidity smart contract that facilitates the minting and burning
 ## Description
 
 TokenDeFIA manages tokens related to Formula 1, abbreviated as "F1." It allows authorized users to:
-
   -Mint new tokens for a specific address.
   -Burn tokens from a specific address.
   -Track the overall token supply and the balance of each address.
