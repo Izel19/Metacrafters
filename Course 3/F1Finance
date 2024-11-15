@@ -1,0 +1,50 @@
+pragma solidity ^0.8.13;
+
+contract F1Finance {
+    mapping(address => uint256) private balances;
+    address public owner;
+
+    error InsufficientBalance(uint256 available, uint256 required);
+
+    event Saving(address indexed sender, uint256 amount);
+    event Upgrades(address indexed recipient, uint256 amount);
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function AddSavings() external payable {
+        require(msg.value > 0, "Deposits less than zero is not allowed");
+        balances[msg.sender] += msg.value;
+        emit Saving(msg.sender, msg.value);
+    }
+
+    receive() external payable {
+        balances[msg.sender] += msg.value;
+        emit Saving(msg.sender, msg.value);
+    }
+
+    fallback() external payable {}
+
+    function produceUpgrades(uint256 _amount) external {
+        uint256 userBalance = balances[msg.sender];
+
+        if (_amount > userBalance) {
+            revert InsufficientBalance(userBalance, _amount);
+        }
+
+        balances[msg.sender] -= _amount;
+        payable(msg.sender).transfer(_amount);
+
+        emit Upgrades(msg.sender, _amount);
+    }
+
+    function balanceChecker() external view returns (uint256) {
+        return balances[msg.sender];
+    }
+
+    function cashoutAllAmount() public {
+        assert(msg.sender == owner);
+        payable(owner).transfer(address(this).balance);
+    }
+}
