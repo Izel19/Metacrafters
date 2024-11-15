@@ -8,7 +8,7 @@ TokenDeFIA manages tokens related to Formula 1, abbreviated as "F1." It allows a
   -Mint new tokens for a specific address.
   -Burn tokens from a specific address.
   -Track the overall token supply and the balance of each address.
-The contract ensures the integrity of operations, such as validating sufficient balances before burning tokens, and includes events for monitoring token activity.
+The contract ensures the integrity of operations, such as validating sufficient balances before burning tokens, and includes events for monitoring token activity. With modification features such as Assert, Revert, and Require, this provides additional security and safety nets towards users using the contract
 
 ## Getting Started
 
