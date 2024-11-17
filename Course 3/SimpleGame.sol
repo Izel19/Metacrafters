@@ -16,7 +16,8 @@ contract SimpleGame {
             revert("Both values are equal. No points awarded.");
         }
 
-        // End the game if a player reaches 5 points
+        assert(player1Score <= 5 && player2Score <= 5);
+
         if (player1Score == 5 || player2Score == 5) {
             gameActive = false;
         }
@@ -32,5 +33,13 @@ contract SimpleGame {
         } else {
             return "No winner yet.";
         }
+    }
+    
+    function resetGame() public {
+        player1Score = 0;
+        player2Score = 0;
+        gameActive = true;
+
+        assert(player1Score == 0 && player2Score == 0 && gameActive);
     }
 }
