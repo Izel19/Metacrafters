@@ -5,18 +5,31 @@ contract SimpleGame {
     uint public player2Score = 0;
     bool public gameActive = true;
 
-    function playRound(uint value1, uint value2) public {
+    function ensureGameActive() internal view {
         require(gameActive, "Game has ended.");
+    }
+
+    function handleTie(uint value1, uint value2) internal pure {
+        if (value1 == value2) {
+            revert("Both values are equal. No points awarded.");
+        }
+    }
+
+    function validateScores() internal view {
+        assert(player1Score <= 5 && player2Score <= 5);
+    }
+
+    function playRound(uint value1, uint value2) public {
+        ensureGameActive();
+        handleTie(value1, value2);
 
         if (value1 > value2) {
             player1Score += 1;
-        } else if (value2 > value1) {
-            player2Score += 1;
         } else {
-            revert("Both values are equal. No points awarded.");
+            player2Score += 1;
         }
 
-        assert(player1Score <= 5 && player2Score <= 5);
+        validateScores();
 
         if (player1Score == 5 || player2Score == 5) {
             gameActive = false;
@@ -40,6 +53,7 @@ contract SimpleGame {
         player2Score = 0;
         gameActive = true;
 
-        assert(player1Score == 0 && player2Score == 0 && gameActive);
+        validateScores();
+        assert(gameActive); 
     }
 }
