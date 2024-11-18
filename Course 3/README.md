@@ -1,53 +1,64 @@
-# TokenDeFIA
+# SimpleGame
 
-TokenDeFIA is a Solidity smart contract that facilitates the minting and burning of tokens representing Formula 1 (F1). This contract tracks token balances for different addresses and allows for the creation and destruction of tokens while ensuring proper validations.
+SimpleGame is a Solidity smart contract that implements a simple two-player game. Players compete by submitting values, and the player with the higher value earns a point. The game ends when a player's score reaches 5, declaring them the winner.
 
 ## Description
 
-TokenDeFIA manages tokens related to Formula 1, abbreviated as "F1." It allows authorized users to:
-  -Mint new tokens for a specific address.
-  -Burn tokens from a specific address.
-  -Track the overall token supply and the balance of each address.
-The contract ensures the integrity of operations, such as validating sufficient balances before burning tokens, and includes events for monitoring token activity. With modification features such as Assert, Revert, and Require, this provides additional security and safety nets towards users using the contract
+SimpleGame allows two players to:
+  -Compete in multiple rounds by providing values.
+  -Earn points for having the higher value in a round.
+  -Handle ties where no points are awarded.
+  -Determine the winner when a player reaches a score of 5.
+  -Reset the game to start a new match.
+The contract enforces gameplay rules through checks, such as ensuring the game is active, preventing ties, and validating score limits. It uses require, revert, and assert to ensure proper operation and prevent invalid game states.
 
 ## Getting Started
 
 ### Installing
 
-To install and deploy the contract, follow these steps:
+To deploy and interact with the contract, follow these steps:
 
-1. Set up your environment: Use a Solidity development tool such as Remix or Hardhat
-2. Copy the code: Clone or copy the contract code into your development environment.
-3. Prepare your compiler: Ensure the Solidity compiler is set to version ^0.8.0 or compatible.
+  1. Set up a Solidity development environment (e.g., Remix or Hardhat).
+  2. Copy the contract code into a new Solidity file (e.g., SimpleGame.sol).
+  3. Compile the contract using Solidity version ^0.8.13.
+  4. Deploy the contract to a test network or local blockchain (e.g., JavaScript VM in Remix).
 
 ## Features
 
 
-### Mint Tokens
-Adds tokens to a specific address and increases the overall token supply.
+### Play a Round
+Players submit values to compete in a round. The player with the higher value earns a point.
 ```
-mint(address _address, uint _amount)
+playRound(uint value1, uint value2)
 ```
+  -Requires the game to be active.
+  -Awards a point to the player with the higher value.
+  -Ends the game if a player's score reaches 5.
 
 ### Burn Tokens
-Removes tokens from a specific address and decreases the overall token supply.
+Retrieves the result of the game after it has ended.
 ```
-burn(address _address, uint _amount)
+checkWinner() public view returns (string memory)
 ```
+  -Returns "Player 1 wins!" or "Player 2 wins!" if there is a winner.
+  -Ensures the game is not still ongoing.
+  
 ### Steps in Remix:
-  1. Open Remix and create a new Solidity file (e.g., TokenDeFIA.sol).
+  1.Open Remix and create a new Solidity file (e.g., SimpleGame.sol).
   2. Paste the contract code into the file.
-  3. Set the compiler version to ^0.8.0 and compile the contract.
-  4. Deploy the contract to a test network (e.g., JavaScript VM or a testnet).
-Interacting with the Contract:
-          -Use the mint function to add tokens to an address. Example: mint(0xAbc123..., 100);
-          -Use the burn function to remove tokens from an address. Example: burn(0xAbc123..., 50);
+  3. Set the compiler version to ^0.8.13 and compile the contract.
+  4. Deploy the contract to the JavaScript VM or another test network.
+
+#### Interacting with the Contract:
+  -Use playRound to play a round. Example: playRound(3, 5) awards a point to Player 2.
+  -Use checkWinner to see the game's result after it ends. Example: checkWinner().
+  -Use resetGame to start a new match. Example: resetGame().
 
 ### Help
- -If the mint or burn operations fail:
-     -Verify the address's balance before burning tokens.
-     -Ensure the _amount provided to the mint function is greater than 0.
- -Ensure compatibility by using Solidity version ^0.8.0.
+Common Issues
+  -"Game has ended.": The game is over. Use resetGame to start a new game.
+  -"Both values are equal. No points awarded.": Players submitted equal values. Provide distinct values.
+  -Gas Consumption: Ensure proper usage of resources when deploying or interacting with the contract.
 
 ### Authors
 Gregorio B. Lantajo Jr.
