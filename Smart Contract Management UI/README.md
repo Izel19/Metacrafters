@@ -78,3 +78,10 @@ This project demonstrates a decentralized application (DApp) that manages a subs
   - Check their current subscription status.
   - Subscribe to a plan by sending the required ETH amount.
 - The front-end displays the current subscription status and offers the option to choose a subscription plan.
+
+### Authors
+Gregorio B. Lantajo Jr.
+202110324@fit.edu.ph
+
+### License
+This project is licensed under the MIT License. See the LICENSE file for more details.
